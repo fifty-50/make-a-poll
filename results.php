@@ -140,7 +140,7 @@
         var vl="";
         if(expired)
           vl="Voting has closed.";
-        else if(Number(pollInfo[pollInfo.length-3])>=Number(pollInfo[pollInfo.length-1])-1&&Number(pollInfo[pollInfo.length-1])!=0)
+        else if(Number(pollInfo[pollInfo.length-3])>=Number(pollInfo[pollInfo.length-1])&&Number(pollInfo[pollInfo.length-1])!=0)
           vl="Voting limit reached.";
         var creationTime=new Date(pollInfo[0] * 1000);
         var currentTime=Date.now();
