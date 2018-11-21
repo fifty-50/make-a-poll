@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Make-a-Poll</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="bulma-0.7.2/css/bulma.min.css">
+    <link rel="stylesheet" href="bulma-0.7.2/css/bulma-checkradio.min.css">
+    <link rel="stylesheet" href="fontawesome-free-5.5.0-web/css/all.min.css">
+	<link rel="stylesheet" href="roboto.css">
+	<script type="text/javascript" src="jquery-3.3.1.js"></script>
+	<script type="text/javascript">
+		var options=2;
+		$(document).ready(function()
+		{
+			validPoll();
+			timerToggle();
+			limitToggle();
+
+  			$(".navbar-burger").click(function()
+			{
+      			$(".navbar-burger").toggleClass("is-active");
+      			$(".navbar-menu").toggleClass("is-active");
+  			});
+
+		});
+		
+		function validPoll()
+		{
+			var check=0;
+			for(var i=1;i<=options;i++)
+			{
+			if(jQuery.trim(document.getElementById('option'+i).value))
+				check++;
+			}
+			(jQuery.trim(document.getElementById('question').value) && check>1)?
+				$("#submitPoll").prop('disabled',false):
+				$("#submitPoll").prop('disabled','disabled');
+		}
+		function addField()
+		{
+			validPoll();
+			var prevOption=document.getElementById('option'+options);
+			prevOption.setAttribute('oninput','validPoll()');
+			options++;
+    		var optionDiv=document.getElementById('options');
+    		var newOptionDiv=document.createElement('div')
+    		newOptionDiv.className='field is-horizontal';
+    		var newOptionDiv2=document.createElement('div')
+    		newOptionDiv2.className='field-body';
+    		var newOptionInput=document.createElement('input');
+    		newOptionInput.className='input is-link';
+    		newOptionInput.id='option'+options;
+    		newOptionInput.name='option'+options;
+    		newOptionInput.type='text';
+    		newOptionInput.placeholder='Option '+options;
+    		newOptionInput.autocomplete='off';
+    		var onin=document.createAttribute('oninput');
+			onin.value='addField()';
+			newOptionInput.setAttributeNode(onin);
+    		newOptionDiv2.append(newOptionInput);
+    		newOptionDiv.append(newOptionDiv2);
+    		optionDiv.append(newOptionDiv);
+		}
+		function limitToggle()
+		{			
+			if($("#limitCheck").is(':checked'))
+			{
+    			$("#limitValue").show();
+    			$("#limitValueLabel").show();
+			}
+			else
+			{
+    			$("#limitValue").hide();
+    			$("#limitValueLabel").hide();
+			}
+		}
+		function timerToggle()
+		{			
+			if($("#expiryCheck").is(':checked'))
+			{
+    			$("#expiryHours").show();
+    			$("#expiryHoursLabel").show();
+			}
+			else
+			{
+    			$("#expiryHours").hide();
+    			$("#expiryHoursLabel").hide();
+			}
+		}
+		function preview()
+		{
+			var check=0;
+			var Preview=document.getElementById('preview');
+			if(Preview.innerHTML&&!jQuery.trim(document.getElementById('question').value))
+			{
+				Preview.innerHTML='<i>Please enter your question</i>';
+				return;
+			}
+			Preview.innerHTML='<p class="title is-4">'+document.getElementById('question').value+'</p>';
+			for(var i=1;i<options;i++)
+			{
+				if(jQuery.trim(document.getElementById('option'+i).value))
+				{
+					check++;
+					var pollPreview=document.createElement('div');
+					pollPreview.className='field';
+					var pollOption=document.createElement('input');
+					pollOption.className='is-checkradio is-small';
+					pollOption.type='radio';
+					pollOption.name='radios';
+					var pollLabel=document.createElement('label');
+					pollOption.id='previewOption'+i;
+					var labelfor=document.createAttribute('for');
+					labelfor.value='previewOption'+i;
+					pollLabel.setAttributeNode(labelfor);
+					pollLabel.innerHTML='<font size="3">'+document.getElementById('option'+i).value+'</font>';
+					pollPreview.append(pollOption);
+					pollPreview.append(pollLabel);
+					Preview.append(pollPreview);
+				}
+			}
+			if(check<2)
+					Preview.innerHTML+='<i>&nbsp;&nbsp;Please enter atleast two options</i>';
+		}
+	</script>
+	<style type="text/css">
+		html
+		{ 
+  			background: url(back.png) no-repeat center center fixed; 
+  			-webkit-background-size: cover;
+  			-moz-background-size: cover;
+  			-o-background-size: cover;
+  			background-size: cover;
+		}
+		body
+		{
+			font-family: 'Roboto', sans-serif;
+		}
+		#preview
+		{
+			-webkit-touch-callout: none;
+    		-webkit-user-select: none;
+    		-khtml-user-select: none;
+   			-moz-user-select: none;
+    		-ms-user-select: none;
+    		user-select: none;
+		}
+		.box
+    	{
+      		background-color: #DDFFFD;
+    	}
+		.navbar.is-warning
+		{
+			background-color: #FFFF56;
+		}
+		.header
+		{
+  			overflow: hidden;
+  			background-color: #000;
+  			padding: 10px 10px;
+		}
+		.header .logo
+		{
+  			font-size: 20px;
+  			text-align: center;
+  			color: yellow;
+  			-webkit-touch-callout: none;
+    		-webkit-user-select: none;
+    		-khtml-user-select: none;
+   			-moz-user-select: none;
+    		-ms-user-select: none;
+    		user-select: none;
+		}
+		.button
+		{
+			  display: inline-block;
+			  border-radius: 4px;
+			  background-color: #FFdd57;
+			  border: none;
+			  max-height: 60px;
+			  color: #000;
+			  text-align: center;
+			  font-size: 20px;
+			  transition: all 0.5s;
+			  cursor: pointer;
+			  margin: 5px;
+		}
+		.button span
+		{
+			cursor: pointer;
+			display: inline-block;
+			position: relative;
+			transition: 0.5s;
+		}
+
+		.button span:after
+		{
+			content: '\00bb';
+			position: absolute;
+			opacity: 0;
+			top: 0;
+			right: -20px;
+			transition: 0.5s;
+		}
+		.button:hover span
+		{
+			padding-right: 25px;
+		}
+		.button:hover span:after
+		{
+			opacity: 1;
+			right: 0;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="header"><center><div class="logo"><span class="icon"><i class="fas fa-poll-h"></i>&nbsp;</span>Make-a-Poll</div></center></div>
+  	<nav class="navbar is-warning" role="navigation" aria-label="main navigation">
+    	<div class="navbar-brand">
+			<a class="navbar-item" href="" style="background-color: #FBFBFB;color: red"><span class="icon"><i class="fas fa-home"></i></span>&nbsp;Make-a-Poll</a>
+			<a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbar">
+			  <span aria-hidden="true"></span>
+			  <span aria-hidden="true"></span>
+			  <span aria-hidden="true"></span>
+			</a>
+		</div>
+		<div id="navbar" class="navbar-menu">
+			<div class="navbar-start">
+			   	<a class="navbar-item" href="popular.php"><span class="icon"><i class="fab fa-hotjar"></i></span>&nbsp;Popular polls</a>
+    	  		<a class="navbar-item" href="recent.php"><span class="icon"><i class="fas fa-history"></i></span>&nbsp;Recent polls</a>
+    	  		<a class="navbar-item" href="stats.php"><span class="icon"><i class="fas fa-chart-bar"></i></span>&nbsp;Statistics</a>
+			   	<a class="navbar-item" href="about.html"><span class="icon"><i class="fas fa-info-circle"></i></span>&nbsp;About</a>
+			</div>
+		</div>
+		<div class="navbar-end"></div>
+	</nav>
+	<br>
+	<div class="columns">
+		<div class="column is-narrow"></div>
+  		<div class="column is-half">
+  			<form action="createPoll.php" id="pollForm" method="post" oninput="preview()">
+				Question
+			  	<div class="field">
+			  		<div class="field-body">
+			   			<div class="field">
+			      			<div class="control">
+			        			<textarea class="textarea is-link" placeholder="Type your question here" autofocus autocomplete="off" id="question" name="question" oninput="validPoll()"></textarea>
+			      			</div>
+			    		</div>
+			  		</div>
+				</div>
+				<br>
+				Options<font color="#777777" size="2">&nbsp;&nbsp;(Blank fields won't be displayed)</font>
+				<div id="options">
+						<div class="field is-horizontal"><div class="field-body"><input id="option1" class="input is-link" type="text" name="option1" placeholder="Option 1" autocomplete="off" oninput="validPoll()"></div></div>
+						<div class="field is-horizontal"><div class="field-body"><input id="option2" class="input is-link" type="text" name="option2" placeholder="Option 2" autocomplete="off" oninput="addField()"></div></div>
+				</div>
+				<br>
+				<input class="is-checkradio is-link" id="privateCheck" type="checkbox" name="private"><label for="privateCheck">Set poll as private</label><br>
+				<input class="is-checkradio is-link" id="expiryCheck" type="checkbox" name="expiry" oninput="timerToggle()"><label for="expiryCheck">Set expiry time</label>
+				<input id="expiryHours" name="expiryHours" type="number" min="1" value="1" style="display: none"><label id="expiryHoursLabel" for="expiryHours" style="display: none">&nbsp;hours</label><br>
+				<input class="is-checkradio is-link" id="limitCheck" type="checkbox" name="limit" oninput="limitToggle()"><label for="limitCheck">Limit number of votes</label>
+				<input id="limitValue" name="limitValue" type="number" min="1" value="1" style="display: none"><label id="limitValueLabel" for="limitValue" style="display: none">&nbsp;votes</label>
+				<br>
+				<br>
+			    <button class="button" type="submit"  style="float: right"><font face="Roboto" size="4"><span>Create Poll</span></font></button>
+			</form>
+	    </div>
+	    <div class="column">
+	    	<p>Preview</p>
+	    	<div id="preview" class="box"><font size="2">Type to preview</font></div>
+	    </div>
+	    <div class="column is-narrow"></div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About Make-a-Poll</title>
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="stylesheet" href="bulma-0.7.2/css/bulma.min.css">
+  <link rel="stylesheet" href="fontawesome-free-5.5.0-web/css/all.min.css">
+  <link rel="stylesheet" href="roboto.css">
+  <script type="text/javascript" src="jquery-3.3.1.js"></script>
+  <style type="text/css">
+  html
+  { 
+  		background: url(back.png) no-repeat center center fixed; 
+  		-webkit-background-size: cover;
+  		-moz-background-size: cover;
+  		-o-background-size: cover;
+  		background-size: cover;
+  }
+  body
+  {
+  	font-family: 'Roboto', sans-serif;
+  }
+  .navbar.is-warning
+  {
+  	background-color: #FFFF56;
+  }
+  .header
+  {
+  		overflow: hidden;
+  		background-color: #000;
+  		padding: 10px 10px;
+  }
+  .header .logo
+  {
+  		font-size: 20px;
+  		text-align: center;
+  		color: yellow;
+  		-webkit-touch-callout: none;
+  		-webkit-user-select: none;
+  		-khtml-user-select: none;
+  			-moz-user-select: none;
+  		-ms-user-select: none;
+  		user-select: none;
+  }
+  .column
+  {
+    padding-top: 150px;
+    font-size: 21px;
+  }
+  </style>
+</head>
+
+<body>
+  <script type="text/javascript">
+    $(document).ready(function()
+        {
+          $(".navbar-burger").click(function()
+          {
+                $(".navbar-burger").toggleClass("is-active");
+                $(".navbar-menu").toggleClass("is-active");
+            });
+        });
+  </script>
+	<div class="header"><center><div class="logo"><span class="icon"><i class="fas fa-poll-h"></i>&nbsp;</span>Make-a-Poll</div></center></div>
+  	<nav class="navbar is-warning" role="navigation" aria-label="main navigation">
+  		<div class="navbar-brand">
+    		<a class="navbar-item" href="/make-a-poll/main.html"><span class="icon"><i class="fas fa-home"></i></span>&nbsp;Make-a-Poll</a>
+    		<a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbar">
+  				<span aria-hidden="true"></span>
+  				<span aria-hidden="true"></span>
+  				<span aria-hidden="true"></span>
+			</a>
+  		</div>
+  		<div id="navbar" class="navbar-menu">
+    		<div class="navbar-start">
+    	  		<a class="navbar-item" href="popular.php"><span class="icon"><i class="fab fa-hotjar"></i></span>&nbsp;Popular polls</a>
+    	  		<a class="navbar-item" href="recent.php"><span class="icon"><i class="fas fa-history"></i></span>&nbsp;Recent polls</a>
+    	  		<a class="navbar-item" href="stats.php"><span class="icon"><i class="fas fa-chart-bar"></i></span>&nbsp;Statistics</a>
+			   	<a class="navbar-item" href="about.html" style="background-color: #FBFBFB;color: red"><span class="icon"><i class="fas fa-info-circle"></i></span>&nbsp;About</a>
+  			</div>
+		</div>
+	</nav>
+	<br>
+	<div class='columns'>
+		<div class="column is-narrow"></div>
+  		<div class="column"><center>
+			<p>Make-a-Poll <span class="icon"><i class="fa fa-poll-h"></i></span> lets you effortlessly create polls and analyze the results.</p><br>
+
+			<p><i><font color="red">Team Members:</font></i><br>
+				&nbsp;&nbsp;&nbsp;Aravind<br>
+				&nbsp;&nbsp;&nbsp;Apoorve<br>
+				&nbsp;&nbsp;&nbsp;Pratyush</p><br>
+
+			<p>Made using <span class="icon"><i class="fab fa-css3-alt"></i></span>Bulma.css, <span class="icon"><i class="fab fa-js-square"></i></span>Chart.js and <span class="icon"><i class="fab fa-font-awesome-alt"></i></span>Font Awesome.</p></center>
+		</div>
+	</div>
+</body>
+</html>
